@@ -15,25 +15,17 @@ class App extends Component {
       <Router>
         <div className="container">
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="https://codingthesmartway.com" target="_blank">
-              <img src={logo} width="30" height="30" alt="CodingTheSmartWay.com" />
-            </a>
             <Link to="/" className="navbar-brand">Traffic Fatality Analyzer</Link>
             <div className="collpase navbar-collapse">
               <ul className="navbar-nav mr-auto">
                 <li className="navbar-item">
                   <Link to="/" className="nav-link">Rows</Link>
                 </li>
-                <li className="navbar-item">
-                  <Link to="/create" className="nav-link">Create Row</Link>
-                </li>
               </ul>
             </div>
           </nav>
           <br/>
           <Route path="/" exact component={RowsList} />
-          <Route path="/edit/:EMPLID" component={EditRow} />
-          <Route path="/create" component={CreateRow} />
         </div>
       </Router>
     );

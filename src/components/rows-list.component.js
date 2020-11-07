@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import axios from 'axios';
 
 const Row = props => (
@@ -8,9 +8,6 @@ const Row = props => (
         <td>{props.row.NAME}</td>
         <td>{props.row.BIRTHDATE}</td>
         <td>{props.row.SALARY}</td>
-        <td>
-            <Link to={"/edit/"+props.row.EMPLID}>Edit</Link>
-        </td>
     </tr>
 )
 
@@ -58,7 +55,6 @@ export default class RowsList extends Component {
                             <th>Name</th>
                             <th>Birthdate</th>
                             <th>Salary</th>
-                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
