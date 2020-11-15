@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {TableContext} from '../table-context';
 import axios from 'axios';
 
 export default class CreateRow extends Component {
@@ -6,35 +7,34 @@ export default class CreateRow extends Component {
     constructor(props) {
         super(props);
 
-        this.onChangeEMPLID = this.onChangeEMPLID.bind(this);
-        this.onChangeNAME = this.onChangeNAME.bind(this);
-        this.onChangeBIRTHDATE = this.onChangeBIRTHDATE.bind(this);
-        this.onChangeSALARY = this.onChangeSALARY.bind(this);
+        this.onChangeProj = this.onChangeProj.bind(this);
+        this.onChangeAtt = this.onChangeAtt.bind(this);
+        this.onChangeCon = this.onChangeCon.bind(this);
+
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            EMPLID: '',
-            NAME: '',
-            BIRTHDATE: '',
-            SALARY: ''
+            proj: '',
+            att: '',
+            con: '',
         }
     }
 
-    onChangeEMPLID(e) {
+    onChangeProj(e) {
         this.setState({
-            EMPLID: e.target.value
+            proj: e.target.value
+        })
+    }
+
+    onChangeAtt(e) {
+        this.setState({
+            att: e.target.value
         });
     }
 
-    onChangeNAME(e) {
+    onChangeCon(e) {
         this.setState({
-            NAME: e.target.value
-        });
-    }
-
-    onChangeBIRTHDATE(e) {
-        this.setState({
-            BIRTHDATE: e.target.value
+            con: e.target.value
         });
     }
 
@@ -47,72 +47,83 @@ export default class CreateRow extends Component {
     onSubmit(e) {
         e.preventDefault();
 
-        console.log(`Form submitted:`);
-        console.log(`EMPLID: ${this.state.EMPLID}`)
-        console.log(`NAME: ${this.state.NAME}`)
-        console.log(`BIRTHDATE: ${this.state.BIRTHDATE}`)
-        console.log(`SALARY: ${this.state.SALARY}`)
+        console.log(`Query submitted:`);
+        console.log(`Proj: ${this.state.proj}`);
+        console.log(`Att: ${this.state.att}`);
+        console.log(`Con: ${this.state.con}`);
 
-        const newRow = {
-            EMPLID: this.state.EMPLID,
-            NAME: this.state.NAME,
-            BIRTHDATE: this.state.BIRTHDATE,
-            SALARY: this.state.SALARY
+        // const newRow = {
+        //     EMPLID: this.state.EMPLID,
+        //     NAME: this.state.NAME,
+        //     BIRTHDATE: this.state.BIRTHDATE,
+        //     SALARY: this.state.SALARY
+        // }
+
+        // axios.post('http://localhost:3000/api/add', newRow)
+        //     .then(res => console.log(res.data));
+
+
+        let query_params = '/select/?';
+        if (this.state.proj != '') {
+            query_params += 'proj=' + this.state.proj;
         }
 
-        axios.post('http://localhost:3000/api/add', newRow)
-            .then(res => console.log(res.data));
+        if (this.state.att != '' && this.state.con != '') {
+            if (query_params != '/select/?') {
+                query_params += '&'
+            }
+            query_params += 'att=' + this.state.att + '&con=' + this.state.con;
+        }
 
-        this.setState({
-            EMPLID: '',
-            NAME: '',
-            BIRTHDATE: '',
-            SALARY: ''
-        })
+        if (query_params == '/select/?') {
+            query_params = '';
+        }
+
+        this.context.handleNewEndpoint('http://localhost:3000/api/employees' + query_params);
+
+        // this.setState({
+        //     EMPLID: '',
+        //     NAME: '',
+        //     BIRTHDATE: '',
+        //     SALARY: ''
+        // })
     }
 
     render() {
         return (
             <div style={{marginTop: 20}}>
-                <h3>Create New Row</h3>
+                <h3>Perform Analysis</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
-                        <label>Employee ID: </label>
+                        <label>Field to Display: </label>
                         <input type="text"
                             className="form-control"
-                            value={this.state.EMPLID}
-                            onChange={this.onChangeEMPLID}
+                            value={this.state.proj}
+                            onChange={this.onChangeProj}
                             />
                     </div>
                     <div className="form-group">
-                        <label>Name: </label>
+                        <label>Attribute to Check: </label>
                         <input type="text"
                             className="form-control"
-                            value={this.state.NAME}
-                            onChange={this.onChangeNAME}
+                            value={this.state.att}
+                            onChange={this.onChangeAtt}
                             />
                     </div>
                     <div className="form-group">
-                        <label>Birthdate: </label>
+                        <label>Condition: </label>
                         <input type="text"
                             className="form-control"
-                            value={this.state.BIRTHDATE}
-                            onChange={this.onChangeBIRTHDATE}
+                            value={this.state.con}
+                            onChange={this.onChangeCon}
                             />
                     </div>
                     <div className="form-group">
-                        <label>Salary: </label>
-                        <input type="text"
-                            className="form-control"
-                            value={this.state.SALARY}
-                            onChange={this.onChangeSALARY}
-                            />
-                    </div>
-                    <div className="form-group">
-                        <input type="submit" value="Create Row" className="btn btn-primary" />
+                        <input type="submit" value="analyze" className="btn btn-primary" />
                     </div>
                 </form>
             </div>
         )
     }
 }
+CreateRow.contextType = TableContext;
