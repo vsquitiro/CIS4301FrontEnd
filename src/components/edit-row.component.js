@@ -21,13 +21,13 @@ export default class EditRow extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:3000/api/employees/'+this.props.match.params.EMPLID)
+        axios.get('http://localhost:3000/api/employees/' + this.props.match.params.EMPLID)
             .then(response => {
                 this.setState({
-                    EMPLID: response.data.EMPLID,
-                    NAME: response.data.NAME,
+                    EMPLID:    response.data.EMPLID,
+                    NAME:      response.data.NAME,
                     BIRTHDATE: response.data.BIRTHDATE,
-                    SALARY: response.data.SALARY
+                    SALARY:    response.data.SALARY
                 })
             })
             .catch(function(error) {

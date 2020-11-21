@@ -11,6 +11,7 @@ export default class ResultTable extends Component {
 
     componentDidMount() {
         console.log('mounting')
+
         axios.get(this.context.table_endpoint)
             .then(response => {
                 this.context.handleNewHeaders(Object.keys(response.data[0]));
@@ -66,11 +67,13 @@ export default class ResultTable extends Component {
 
     rowList(headers) {
         return this.state.rows.map(currentRow => (
-        <tr>{this.rowData(currentRow,headers)}</tr>
+        <tr>
+            {this.rowData(currentRow, headers)}
+        </tr>
         ))
     }
 
-    rowData(row,headers) {
+    rowData(row, headers) {
         return headers.map(header => (
             <td>
                 {row[header]}
@@ -80,7 +83,7 @@ export default class ResultTable extends Component {
 
     firstLetterCap(string) {
         let lowerString = string.toLowerCase();
-        let firstChar = string.charAt(0);
+        let firstChar   = string.charAt(0);
         return firstChar + lowerString.slice(1, string.length);
     }
 
@@ -96,16 +99,21 @@ export default class ResultTable extends Component {
         return (
             <div>
                 <h3>Results</h3>
+
                 <table className="table table-striped" style={{ marginTop: 20 }}>
+
                     <thead>
                         <tr>
                             {this.headersList(this.context.table_headers)}
                         </tr>
                     </thead>
+
                     <tbody>
-                        { this.rowList(this.context.table_headers) }
+                        {this.rowList(this.context.table_headers)}
                     </tbody>
+
                 </table>
+                
             </div>
         )
     }
