@@ -5,8 +5,6 @@ import TableProvider from './table-provider';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import CreateRow from "./components/create-row.component";
-import EditRow from "./components/edit-row.component";
-import RowsList from "./components/rows-list.component";
 import ResultTable from "./components/result-table.component";
 
 import logo from "./logo.png";
