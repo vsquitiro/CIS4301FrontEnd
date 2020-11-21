@@ -4,7 +4,7 @@ import React from 'react';
 class TableProvider extends React.Component {
     state = {
       table_headers: [],
-      table_endpoint: 'http://localhost:3000/api/employees/',
+      table_endpoint: 'localhost:3000/api/employees/',
     };
   
     handleNewHeaders = (headers_list) => {

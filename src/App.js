@@ -35,13 +35,12 @@ class App extends Component {
               </div>
             </nav>
             <br/>
-            <Route path="/" component={CreateRow} />
-            <Route path="/" component={ResultTable} />
+            <CreateRow />
+            <ResultTable />
+            {/* <Route path="/" component={CreateRow} /> */}
+            {/* <Route path="/" component={ResultTable} /> */}
+            <Map />
           </div>
-
-
-          <Map />
-
           
           {/* <Map />    <===== Uncomment this or Place this along with the 
                                 Import map above to place map on any page */}

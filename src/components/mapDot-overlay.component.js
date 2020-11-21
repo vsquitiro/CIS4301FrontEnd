@@ -1,12 +1,20 @@
 import React from 'react';
+import axios from 'axios';
 //import { TileLayer, Marker, Popup } from 'react-leaflet';
 import Leaflet from 'leaflet';
+import {TableContext} from '../table-context';
 import 'leaflet/dist/leaflet.css'
 
 
 
 class Map extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      mapPoints: [],
+    };
+  }
 
   componentDidMount() {
 
@@ -75,15 +83,37 @@ class Map extends React.Component {
 
     //var mapDOTs = Leaflet.circleMarker([48.307025, 14.284829],markerParams).bindPopup('<b>SUPER COOL</b>').addTo(map);
 
-    var mapDOTs  = Leaflet.circleMarker([29.652,  -82.348],markerParams).bindPopup('<b>SUPER COOL</b>').addTo(map);
-    var mapDOTs2 = Leaflet.circleMarker([29.6522, -82.345],markerParams).bindPopup('<b>SUPER COOL</b>').addTo(map);
-    
+    // var mapDOTs  = Leaflet.circleMarker([29.652,  -82.348],markerParams).bindPopup('<b>SUPER COOL</b>').addTo(map);
+    // var mapDOTs2 = Leaflet.circleMarker([29.6522, -82.345],markerParams).bindPopup('<b>SUPER COOL</b>').addTo(map);
+    console.log('Map has mounted');
+
+    axios.get('http://localhost:3000/api/employees/select/?proj=latitude, longitude&att=state&con=12')
+    // axios.get('http://localhost:3000/api/employees/')
+      .then(response => {
+        console.log('Map call complete');
+        this.setState({mapPoints: response.data});
+        console.log('Map object below:')
+        console.log(this.state.mapPoints);
+        console.log('map object end');
+        console.log(this.state.mapPoints.length);
+
+        for (var i=0;i<(this.state.mapPoints.length);i++) {
+          if (this.state.mapPoints[i].LATITUDE != null && this.state.mapPoints[i].LONGITUDE != null) {
+            Leaflet.circleMarker([this.state.mapPoints[i].LATITUDE,  this.state.mapPoints[i].LONGITUDE],markerParams).bindPopup('Fatality').addTo(map);
+          }
+        }
+      });
+
+    // for (var i=0;i<(this.state.mapPoints.length);i++) {
+    //   console.log(i);
+    //   Leaflet.circleMarker([this.state.mapPoints[i].latitude,  this.state.mapPoints[i].longitude],markerParams).bindPopup('<b>SUPER COOL</b>').addTo(map);
+    // }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // Add baseLayers and overlays to layer panel
     Leaflet.control.layers(baseLayers).addTo(map);
   }
-
 
   render() {
     return (
@@ -91,5 +121,6 @@ class Map extends React.Component {
     )
   }
 }
+Map.contextType = TableContext;
 
 export default Map;
