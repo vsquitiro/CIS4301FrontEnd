@@ -4,15 +4,17 @@ import React from 'react';
 class TableProvider extends React.Component {
     state = {
       table_headers: [],
-      table_endpoint: 'localhost:3000/api/state_ranking/',
+      table_obj: {},
+      table_endpoint: 'https://localhost:3000/api/state_ranking/',
     };
   
     handleNewHeaders = (headers_list) => {
         this.setState({table_headers: headers_list});
     }
 
-    handleNewEndpoint = (endpoint) => {
+    handleNewEndpoint = (endpoint, obj) => {
         this.setState({table_endpoint: endpoint});
+        this.setState({table_obj: obj});
     }
 
     render() {

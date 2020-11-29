@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import TableProvider from './table-provider';
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -9,9 +9,9 @@ import CreateRow from "./components/create-row.component";
 // import RowsList from "./components/rows-list.component";
 import ResultTable from "./components/result-table.component";
 
-import Map from "./components/mapDot-overlay.component.js";
+// import Map from "./components/mapDot-overlay.component.js";
 
-import logo from "./logo.png";
+// import logo from "./logo.png";
 
 class App extends Component {
   render() {
@@ -29,7 +29,7 @@ class App extends Component {
             <br/>
             <CreateRow />
             <ResultTable />
-            <Map />
+            {/* <Map /> */}
           </div>
           
         </Router>
