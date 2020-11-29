@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 import axios from 'axios';
 import {TableContext} from '../table-context';
 
@@ -12,9 +12,10 @@ export default class ResultTable extends Component {
     componentDidMount() {
         console.log('mounting')
 
-        axios.post(this.context.table_endpoint, this.context.table_obj)
+        axios.get(this.context.table_endpoint)
             .then(response => {
                 this.context.handleNewHeaders(Object.keys(response.data[0]));
+                // console.log(this.context.table_headers);
                 this.setState({rows: response.data});
             })
             .catch(function (error) {
@@ -26,11 +27,11 @@ export default class ResultTable extends Component {
         if (array1 === undefined || array2 === undefined) {
             return false;
         }
-        if (array1.length !== array2.length) {
+        if (array1.length != array2.length) {
             return false;
         }
         for (var i = 0; i < array1.length; ++i) {
-            if (JSON.stringify(array1[i]) !== JSON.stringify(array2[i])) {
+            if (JSON.stringify(array1[i]) != JSON.stringify(array2[i])) {
                 return false;
             }
         }
@@ -38,9 +39,8 @@ export default class ResultTable extends Component {
     }
 
     componentDidUpdate() {
-        console.log('updating');
-        console.log(this.context.table_obj);
-        axios.post(this.context.table_endpoint, this.context.table_obj)
+        console.log('updating')
+        axios.get(this.context.table_endpoint)
             .then(response => {
                 if (!this.arrayCheck(this.context.table_headers,Object.keys(response.data[0]))) {
                     console.log('header updating');
@@ -59,6 +59,12 @@ export default class ResultTable extends Component {
             })
     }
 
+    // rowList() {
+    //     return this.state.rows.map(function(currentRow, i) {
+    //         return <RowItem row={currentRow} key={i} />;
+    //     });
+    // }
+
     rowList(headers) {
         return this.state.rows.map(currentRow => (
         <tr>
@@ -76,7 +82,6 @@ export default class ResultTable extends Component {
     }
 
     firstLetterCap(string) {
-        string = string.replace("_"," ");
         let lowerString = string.toLowerCase();
         let firstChar   = string.charAt(0);
         return firstChar + lowerString.slice(1, string.length);
@@ -98,7 +103,7 @@ export default class ResultTable extends Component {
                 <table className="table table-striped" style={{ marginTop: 20 }}>
 
                     <thead>
-                        <tr style = {{fontWeight: "bold"}}>
+                        <tr>
                             {this.headersList(this.context.table_headers)}
                         </tr>
                     </thead>
