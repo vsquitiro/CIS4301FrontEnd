@@ -8,15 +8,15 @@ export default class CreateRow extends Component {
         super(props);
 
         this.onChangeProj = this.onChangeProj.bind(this);
-        this.onChangeAtt = this.onChangeAtt.bind(this);
-        this.onChangeCon = this.onChangeCon.bind(this);
+        this.onChangeAtt  = this.onChangeAtt.bind(this);
+        this.onChangeCon  = this.onChangeCon.bind(this);
 
-        this.onSubmit = this.onSubmit.bind(this);
+        this.onSubmit     = this.onSubmit.bind(this);
 
         this.state = {
             proj: '',
-            att: '',
-            con: '',
+            att:  '',
+            con:  '',
         }
     }
 
@@ -49,8 +49,8 @@ export default class CreateRow extends Component {
 
         console.log(`Query submitted:`);
         console.log(`Proj: ${this.state.proj}`);
-        console.log(`Att: ${this.state.att}`);
-        console.log(`Con: ${this.state.con}`);
+        console.log(`Att:  ${this.state.att}`);
+        console.log(`Con:  ${this.state.con}`);
 
         // const newRow = {
         //     EMPLID: this.state.EMPLID,
