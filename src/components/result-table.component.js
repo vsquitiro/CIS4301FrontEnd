@@ -15,7 +15,6 @@ export default class ResultTable extends Component {
         axios.get(this.context.table_endpoint)
             .then(response => {
                 this.context.handleNewHeaders(Object.keys(response.data[0]));
-                // console.log(this.context.table_headers);
                 this.setState({rows: response.data});
             })
             .catch(function (error) {
@@ -58,12 +57,6 @@ export default class ResultTable extends Component {
                 console.log(error);
             })
     }
-
-    // rowList() {
-    //     return this.state.rows.map(function(currentRow, i) {
-    //         return <RowItem row={currentRow} key={i} />;
-    //     });
-    // }
 
     rowList(headers) {
         return this.state.rows.map(currentRow => (
