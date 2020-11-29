@@ -17,10 +17,26 @@ export default class CreateRow extends Component {
         this.onChangeDateMax = this.onChangeDateMax.bind(this);
         this.onChangeValue = this.onChangeValue.bind(this);
         this.addValuesToDropdown = this.addValuesToDropdown.bind(this);
+        this.multipleParams = this.multipleParams.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
             analysisType: 'accident_percentage',
+            param_count: 1,
+            params: [{
+                param: undefined,
+                min: undefined,
+                max: undefined,
+                value: undefined,
+                idx: 0
+            },
+            {
+                param: undefined,
+                min: undefined,
+                max: undefined,
+                value: undefined,
+                idx: 1
+            }],
             param: undefined,
             min: undefined,
             max: undefined,
@@ -38,6 +54,8 @@ export default class CreateRow extends Component {
     }
 
     paramSpecifics(param) {
+        console.log('Param_test');
+        console.log(param);
         if (['age','speed','speeding'].includes(param)) {
             return (
                 <div>
@@ -58,6 +76,7 @@ export default class CreateRow extends Component {
                 </div>
             )
         } else if (['timestamp'].includes(param)) {
+            console.log('timestamp recognized.')
             return (
                 <div>
                     <div>
@@ -101,7 +120,34 @@ export default class CreateRow extends Component {
         });
     }
 
+    multipleParams() {
+        return this.state.params.map(param_set => (
+        <div>
+            <label style={{fontWeight: "bold"}}>Attribute to Analyze</label>
+            <div style={{marginBottom: 10}}>
+                <select value={param_set.param} onChange={this.onChangeParam}>
+                    <option value={undefined}></option>
+                    <option value="age">Age</option>
+                    <option value="collision">Collision</option>
+                    <option value="timestamp">Date</option>
+                    <option value="drinking">Drinking</option>
+                    <option value="drugs">Drugs</option>
+                    <option value="road_surface">Road Surface Condition</option>
+                    <option value="sex">Sex</option>
+                    <option value="speed">Speed</option>
+                    <option value="speeding">Speed over Speed Limit</option>
+                    <option disabled={this.state.analysisType==="state_ranking" ? true : false } value="state">State</option>
+                    <option value="weather">Weather</option>
+                </select>
+            </div>
+            { this.paramSpecifics(this.state.param) }
+        </div>
+        ))
+    }
+
     onChangeParam(e) {
+        console.log('Param change test');
+        console.log(e.target.value);
         this.setState({
             param: e.target.value
         });
@@ -205,10 +251,6 @@ export default class CreateRow extends Component {
         }
     }
 
-    componentDidMount() {
-
-    }
-
     render() {
         return (
             <div style={{marginTop: 20}}>
@@ -237,8 +279,9 @@ export default class CreateRow extends Component {
                                 onChange={this.onChangeAnalysisType}
                                 />
                             <label style={{marginLeft: 10}}>State Ranking</label>
-                        </div>                  
-                        <label style={{fontWeight: "bold"}}>Attribute to Analyze</label>
+                        </div>
+                        { this.multipleParams()}                  
+                        {/* <label style={{fontWeight: "bold"}}>Attribute to Analyze</label>
                         <div style={{marginBottom: 10}}>
                             <select value={this.state.param} onChange={this.onChangeParam}>
                                 <option value={undefined}></option>
@@ -255,7 +298,7 @@ export default class CreateRow extends Component {
                                 <option value="weather">Weather</option>
                             </select>
                         </div>
-                        {this.paramSpecifics(this.state.param)}
+                        { this.paramSpecifics(this.state.param) } */}
                     </div>
                     <div className="form-group">
                         <input type="submit" value="Analyze" className="btn btn-primary" />
