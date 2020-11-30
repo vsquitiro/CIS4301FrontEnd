@@ -7,8 +7,5 @@ module.exports = [
     { 'key': 7, 'val': 'Sideswipe - Same Direction'},
     { 'key': 8, 'val': 'Sideswipe - Opposite Direction'},
     { 'key': 9, 'val': 'Rear-to-Side'},
-    { 'key': 10, 'val': 'Rear-to-Rear'},
-    { 'key': 11, 'val': 'Other'},
-    { 'key': 98, 'val': 'Not Reported'},
-    { 'key': 99, 'val': 'Unknown'},
+    { 'key': 11, 'val': 'Other'}
 ]
