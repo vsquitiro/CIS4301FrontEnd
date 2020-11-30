@@ -163,8 +163,7 @@ export default class CreateRow extends Component {
         if (query_params === '/select/?') {
             query_params = '';
         }
-
-        console.log("Min Max Test");
+        
         console.log(this.state.param);
 
         let min_send = undefined;

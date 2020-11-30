@@ -12,7 +12,7 @@ export default class ResultTable extends Component {
     componentDidMount() {
         console.log('mounting')
 
-        axios.get(this.context.table_endpoint)
+        axios.post(this.context.table_endpoint)
             .then(response => {
                 this.context.handleNewHeaders(Object.keys(response.data[0]));
                 // console.log(this.context.table_headers);
@@ -40,7 +40,7 @@ export default class ResultTable extends Component {
 
     componentDidUpdate() {
         console.log('updating')
-        axios.get(this.context.table_endpoint)
+        axios.post(this.context.table_endpoint)
             .then(response => {
                 if (!this.arrayCheck(this.context.table_headers,Object.keys(response.data[0]))) {
                     console.log('header updating');

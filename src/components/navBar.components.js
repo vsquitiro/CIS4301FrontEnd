@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, Nav} from 'react-bootstrap';
-
-
+import { Navbar, Nav } from 'react-bootstrap';
 
 class NavBar extends Component {
   render() {
@@ -14,20 +12,18 @@ class NavBar extends Component {
 
           <Navbar.Toggle aria-controls = "responsive-navbar-nav" />
           <Navbar.Collapse id = "responsive-navbar-nav">
-            <Nav className    = "mr-auto">
-              <Nav.Link href  = "queriesPage">   Queries </Nav.Link>
-              <Nav.Link href  = "map">           Map </Nav.Link>
-              <Nav.Link href  = "accidentGraph"> Graph </Nav.Link>
-              <Nav.Link href  = "about">         About </Nav.Link>
+            <Nav className = "mr-auto">
+              <Nav.Link href = "queriesPage"> Queries </Nav.Link>
+              <Nav.Link href = "map"> Map </Nav.Link>
+              <Nav.Link href = "accidentGraph"> Graph </Nav.Link>
+              <Nav.Link href = "about">  About </Nav.Link>
             </Nav>
 
           </Navbar.Collapse>
 
         </Navbar>
       </div>
-
     );
   }
 }
-
 export default NavBar;
