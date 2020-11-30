@@ -3,5 +3,5 @@ module.exports = [
     { 'key': 0, 'val': 'No Drugs'},
     { 'key': 1, 'val': 'Drugs Involved'},
     { 'key': 8, 'val': 'Not Reported'},
-    { 'key': 9, 'val': 'Unknown'},
+    { 'key': 9, 'val': 'Unknown'}
 ]

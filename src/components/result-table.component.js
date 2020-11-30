@@ -16,6 +16,7 @@ export default class ResultTable extends Component {
             .then(response => {
                 this.context.handleNewHeaders(Object.keys(response.data[0]));
                 this.setState({rows: response.data});
+                console.log(response.data);
             })
             .catch(function (error) {
                 console.log(error);
@@ -40,23 +41,25 @@ export default class ResultTable extends Component {
     componentDidUpdate() {
         console.log('updating');
         console.log(this.context.table_obj);
+
+        let error_proc = false;
+
         axios.post(this.context.table_endpoint, this.context.table_obj)
             .then(response => {
                 if (!this.arrayCheck(this.context.table_headers,Object.keys(response.data[0]))) {
-                    console.log('header updating');
-                    console.log(this.context.table_headers);
-                    console.log(Object.keys(response.data[0]));
                     this.context.handleNewHeaders(Object.keys(response.data[0]));
                 }
                 if (!this.arrayCheck(this.state.rows, response.data)) {
-                    console.log(this.state.rows);
-                    console.log(response.data);
                     this.setState({rows: response.data});
                 }
             })
-            .catch(function (error) {
+            .catch(error => {
                 console.log(error);
+                this.context.handleNewHeaders(['No Results']);
+                this.setState({rows: [{'No Results':''}]});  
             })
+
+        console.log(error_proc);
     }
 
     rowList(headers) {

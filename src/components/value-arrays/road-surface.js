@@ -10,7 +10,5 @@ module.exports = [
     { 'key': 7, 'val': 'Oil'},
     { 'key': 8, 'val': 'Other'},
     { 'key': 10, 'val': 'Slush'},
-    { 'key': 11, 'val': 'Mud, Dirt, Gravel'},
-    { 'key': 98, 'val': 'Not Reported'},
-    { 'key': 99, 'val': 'Unknown'}
+    { 'key': 11, 'val': 'Mud, Dirt, Gravel'}
 ]
