@@ -20,7 +20,7 @@ class App extends Component {
 
                     <Route path="/queriesPage" component={queriesPage}/>
                     <Route path="/home" component={queriesPage}/>
-                    <Route path="/graph" component={graphPage}>
+                    <Route path="/graph" component={graphPage}/>
                     {/* <Route path="/accidentGraph" component={AccidentGraph}/> */}
                     <Route path="/map" component={mapPage}/>
                     {/* <Route path="/About" component={About}/> */}
