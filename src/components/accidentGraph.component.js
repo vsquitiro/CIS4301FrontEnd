@@ -84,9 +84,9 @@ class accidentGraph extends Component {
 				// 	month_obj.search_params.push(this.context.table_obj.search_params[j]);
 				// }
 
-				axios.post('http://localhost:3000/api/graph_results', month_obj)
+				axios.post('http://localhost:3000/api/graph_results', this.context.table_obj)
 					.then(response => {
-						this.state.options['data'][0]['dataPoints'].push({x: this.state.options['data'][0]['dataPoints'].length + 1, y: response.data[0]['ACCIDENT_COUNT']});
+						this.state.options['data'][0]['dataPoints'][1]({x: this.state.options['data'][0]['dataPoints'].length + 1, y: response.data[0]['ACCIDENT_COUNT']});
 						console.log('response');
 					
 						this.setState({options: options})
