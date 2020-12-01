@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-// import Map from "./components/mapDot-overlay.component.js";
+import mapPage from "./components/mapPage.component";
 import AccidentGraph from "./components/accidentGraph.component.js";
-import queriesPage from "./components/queriesPage.component.js";
+import queriesPage from "./components/queriesPage.component";
 import NavBar from "./components/navBar.components.js";
 
 class App extends Component {
@@ -18,8 +18,9 @@ class App extends Component {
                 <Switch>
 
                     <Route path="/queriesPage" component={queriesPage}/>
+                    <Route path="/home" component={queriesPage}/>
                     <Route path="/accidentGraph" component={AccidentGraph}/>
-                    {/* <Route path="/map" component={Map}/> */}
+                    <Route path="/map" component={mapPage}/>
                     {/* <Route path="/About" component={About}/> */}
                     
                 </Switch>

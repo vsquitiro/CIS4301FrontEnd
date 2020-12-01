@@ -1,13 +1,12 @@
 import React from 'react';
 import axios from 'axios';
-import Leaflet from 'leaflet';
 import {TableContext} from '../table-context';
 import 'leaflet/dist/leaflet.css'
 import CanvasJSReact from '../canvasjs.react';
 
 var Component = React.Component;
 // var CanvasJSReact = require('/canvasjs.react');
-var CanvasJS = CanvasJSReact.CanvasJS;
+// var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 

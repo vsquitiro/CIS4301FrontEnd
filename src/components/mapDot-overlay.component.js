@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-//import { TileLayer, Marker, Popup } from 'react-leaflet';
-import Leaflet from 'leaflet';
+import Leaflet, { circleMarker } from 'leaflet';
 import {TableContext} from '../table-context';
 import 'leaflet/dist/leaflet.css'
 
@@ -13,6 +12,8 @@ class Map extends React.Component {
     super(props);
     this.state = {
       mapPoints: [],
+      circleMarkers: [],
+      map: null 
     };
   }
 
@@ -52,69 +53,51 @@ class Map extends React.Component {
       "ESRI World Imagery": esri_WorldImagery
     };
 
-    // Adding an Icon to point on map
-
-    // var greenIcon = Leaflet.icon({
-    //     iconUrl: 'https://img.icons8.com/clouds/2x/cloud-network.png',
-    //     iconSize:    [39, 39],
-    //     iconAnchor:  [18, 39],
-    //     popupAnchor: [10, -35]
-    // });
-
-    // var eisenstadt = Leaflet.marker([47.845993, 16.527337],  {icon: greenIcon}).bindPopup('<b>Eisenstadt, Burgenland</b>');
-
-
-    // var capitals = Leaflet.layerGroup([eisenstadt]).addTo(map);
-                                       // ^^^^^^^^^ THIS Will BE AN ARRAY
-    // var overlays = {
-    //   'Capitals': capitals
-    // };
-
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    var markerParams = {
-            radius: 4,
-            fillColor: 'red',
-            color: '#fff',
-            weight: 1,
-            opacity: 0.5,
-            fillOpacity: 0.8
-    };
-
-    //var mapDOTs = Leaflet.circleMarker([48.307025, 14.284829],markerParams).bindPopup('<b>SUPER COOL</b>').addTo(map);
-
-    // var mapDOTs  = Leaflet.circleMarker([29.652,  -82.348],markerParams).bindPopup('<b>SUPER COOL</b>').addTo(map);
-    // var mapDOTs2 = Leaflet.circleMarker([29.6522, -82.345],markerParams).bindPopup('<b>SUPER COOL</b>').addTo(map);
-    console.log('Map has mounted');
-
-    axios.get('http://localhost:3000/api/employees/select/?proj=latitude, longitude&att=state&con=12')
-    // axios.get('http://localhost:3000/api/employees/')
-      .then(response => {
-        console.log('Map call complete');
-        this.setState({mapPoints: response.data});
-        console.log('Map object below:')
-        console.log(this.state.mapPoints);
-        console.log('map object end');
-        console.log(this.state.mapPoints.length);
-
-        for (var i=0;i<(this.state.mapPoints.length);i++) {
-          if (this.state.mapPoints[i].LATITUDE != null && this.state.mapPoints[i].LONGITUDE != null) {
-            Leaflet.circleMarker([this.state.mapPoints[i].LATITUDE,  this.state.mapPoints[i].LONGITUDE],markerParams).bindPopup('Fatality').addTo(map);
-          }
-        }
-      });
-
-    // for (var i=0;i<(this.state.mapPoints.length);i++) {
-    //   console.log(i);
-    //   Leaflet.circleMarker([this.state.mapPoints[i].latitude,  this.state.mapPoints[i].longitude],markerParams).bindPopup('<b>SUPER COOL</b>').addTo(map);
-    // }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     // Add baseLayers and overlays to layer panel
     Leaflet.control.layers(baseLayers).addTo(map);
+
+    this.setState({map: map});
   }
 
+  componentDidUpdate() {
+    if(this.context.needs_update){ 
+      var map = this.state.map;
+
+      for (var i=0; i<(this.state.circleMarkers.length); i++) {
+        map.removeLayer(this.state.circleMarkers[i]);
+      }
+
+      var markerParams = {
+        radius: 4,
+        fillColor: 'red',
+        color: '#fff',
+        weight: 1,
+        opacity: 0.5,
+        fillOpacity: 0.8
+      };
+
+      var circleMarkers = [];
+
+      axios.post('http://localhost:3000/api/map_results', this.context.table_obj)
+        .then(response => {
+          this.setState({mapPoints: response.data});
+          for (var i=0;i<(this.state.mapPoints.length);i++) {
+            if (this.state.mapPoints[i].LATITUDE != null && this.state.mapPoints[i].LONGITUDE != null) {
+              circleMarkers.push(circleMarker([this.state.mapPoints[i].LATITUDE, this.state.mapPoints[i].LONGITUDE],markerParams));
+            }
+          }
+          console.log('attempted to add points');
+          console.log(circleMarkers.length);
+          for (var j=0;j<circleMarkers.length;j++) {
+            circleMarkers[j].addTo(map);
+          }
+      });
+
+      this.setState({circleMarkers: circleMarkers});
+      this.context.markAsUpdated();
+    }
+  }
+  
   render() {
     return (
         <div id="mapID"> </div>

@@ -269,6 +269,8 @@ export default class CreateRow extends Component {
         } else if (this.state.analysisType === 'accident_percentage') {
             this.context.handleNewEndpoint('http://localhost:3000/api/accident_percentage', obj);
         }
+
+        this.context.markAsNeedingUpdate();
     }
 
     render() {
