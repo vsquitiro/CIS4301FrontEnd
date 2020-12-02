@@ -1,0 +1,22 @@
+module.exports = [
+    { 'key': undefined, 'val': ''},
+    { 'key': 0, 'val': 'Not Distracted'},
+    { 'key': 1, 'val': 'Looked But Did Not See'},
+    { 'key': 3, 'val': 'By Other Occupant'},
+    { 'key': 5, 'val': 'While Talking or Listening to Cellular Phone'},
+    { 'key': 6, 'val': 'While Manipulating Cellular Phone'},
+    { 'key': 7, 'val': 'While Adjusting Audio or Climate Controls'},
+    { 'key': 9, 'val': 'While Using Other Component/Controls Integral to Vehicle'},
+    { 'key': 10, 'val': 'While Using or Reaching For Device'},
+    { 'key': 12, 'val': 'Distracted by Outside Person, Object or Event'},
+    { 'key': 13, 'val': 'Eating or Drinking'},
+    { 'key': 15, 'val': 'Other Cellular Phone Related'},
+    { 'key': 16, 'val': 'No Driver Present'},
+    { 'key': 17, 'val': 'Distraction/Inattention'},
+    { 'key': 19, 'val': 'Careless/Inattentive'},
+    { 'key': 92, 'val': 'Distraction, Details Unknown'},
+    { 'key': 93, 'val': 'Inattention, Details Unknown'},
+    { 'key': 96, 'val': 'Not Reported'},
+    { 'key': 98, 'val': 'Other Distraction'},
+    { 'key': 99, 'val': 'Unknown if Distracted'}
+]

@@ -84,14 +84,27 @@ class accidentGraph extends Component {
 				// 	month_obj.search_params.push(this.context.table_obj.search_params[j]);
 				// }
 
-				axios.post('http://localhost:3000/api/graph_results', this.context.table_obj)
-					.then(response => {
-						this.state.options['data'][0]['dataPoints'][1]({x: this.state.options['data'][0]['dataPoints'].length + 1, y: response.data[0]['ACCIDENT_COUNT']});
-						console.log('response');
-					
-						this.setState({options: options})
-					})
-			// }
+			axios.post('http://localhost:3000/api/graph_results', this.context.table_obj)
+				.then(response => {
+					var options = this.state.options
+
+					options['data'][0]['dataPoints'][0] = {x: 1, y: response.data[0]['ACCIDENT_COUNT']};
+					options['data'][0]['dataPoints'][1] = {x: 2, y: response.data[1]['ACCIDENT_COUNT']};
+					options['data'][0]['dataPoints'][2] = {x: 3, y: response.data[2]['ACCIDENT_COUNT']};
+					options['data'][0]['dataPoints'][3] = {x: 4, y: response.data[3]['ACCIDENT_COUNT']};
+					options['data'][0]['dataPoints'][4] = {x: 5, y: response.data[4]['ACCIDENT_COUNT']};
+					options['data'][0]['dataPoints'][5] = {x: 6, y: response.data[5]['ACCIDENT_COUNT']};
+					options['data'][0]['dataPoints'][6] = {x: 7, y: response.data[5]['ACCIDENT_COUNT']};
+					options['data'][0]['dataPoints'][7] = {x: 8, y: response.data[7]['ACCIDENT_COUNT']};
+					options['data'][0]['dataPoints'][8] = {x: 9, y: response.data[8]['ACCIDENT_COUNT']};
+					options['data'][0]['dataPoints'][9] = {x: 10, y: response.data[9]['ACCIDENT_COUNT']};
+					options['data'][0]['dataPoints'][10] = {x: 11, y: response.data[10]['ACCIDENT_COUNT']};
+					options['data'][0]['dataPoints'][11] = {x: 12, y: response.data[11]['ACCIDENT_COUNT']};
+
+					console.log('response');
+				
+					this.setState({options: options})
+				})
 
 			this.context.markAsUpdated();
 		}

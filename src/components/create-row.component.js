@@ -19,6 +19,7 @@ export default class CreateRow extends Component {
         this.addValuesToDropdown = this.addValuesToDropdown.bind(this);
         this.multipleParams = this.multipleParams.bind(this);
         this.addAttribute = this.addAttribute.bind(this);
+        this.tupleCount = this.tupleCount.bind(this);
         this.removeAttribute = this.removeAttribute.bind(this);
         this.addRemoveButtons = this.addRemoveButtons.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -40,6 +41,8 @@ export default class CreateRow extends Component {
                 'weather': require('./value-arrays/weather'),
                 'drinking': require('./value-arrays/drinking'),
                 'drugs': require('./value-arrays/drugs'),
+                'distracted': require('./value-arrays/distracted'),
+                'mfactor': require('./value-arrays/mfactor')
             }
         }
     }
@@ -71,7 +74,7 @@ export default class CreateRow extends Component {
                     <div>
                         <label style={{fontWeight: "bold"}}>Start Date</label>
                     </div>
-                    <DatePicker 
+                    <DatePicker
                         selected={this.state.params[idx]['min']}
                         onSelect={this.onChangeDateMin.bind(this, idx)}
                         minDate={new Date("2015/01/01")}
@@ -86,9 +89,10 @@ export default class CreateRow extends Component {
                         minDate={new Date("2015/01/01")}
                         maxDate={new Date("2015/12/31")}
                     />
+                    <div style={{marginBottom: 200}}></div>
                 </div>
             )
-        } else if (['state','sex','road_surface','collision','weather','drinking','drugs'].includes(param)) {
+        } else if (['state','sex','road_surface','collision','weather','drinking','drugs','distracted','mfactor'].includes(param)) {
             return (
                 <div>
                     <label style={{fontWeight: "bold"}}>Value of Attribute</label>
@@ -118,8 +122,10 @@ export default class CreateRow extends Component {
                     <option value={"age"}>Age</option>
                     <option value={"collision"}>Collision</option>
                     <option value={"timestamp"}>Date</option>
+                    <option value={"distracted"}>Distracted</option>
                     <option value={"drinking"}>Drinking</option>
                     <option value={"drugs"}>Drugs</option>
+                    <option value={"mfactor"}>Mechanical Factor</option>
                     <option value={"road_surface"}>Road Surface Condition</option>
                     <option value={"sex"}>Sex</option>
                     <option value={"speed"}>Speed</option>
@@ -202,6 +208,11 @@ export default class CreateRow extends Component {
         });
     }
 
+    tupleCount() {
+        this.context.handleNewEndpoint('http://localhost:3000/api/count', this.context.table_obj);
+        this.context.markAsNeedingUpdate();
+    }
+
     removeAttribute() {
         let param_obj = this.state.params;
         param_obj.pop();
@@ -214,6 +225,7 @@ export default class CreateRow extends Component {
         if(paramNum > 1) {
             return (
                 <div>
+                    <button style={{marginBottom: 10, marginTop: 5, marginRight: 15}} onClick={ this.tupleCount } className="btn btn-primary">Tuple Count</button>
                     <button style={{marginBottom: 10, marginTop: 5, marginRight: 15}} onClick={ this.addAttribute } className="btn btn-primary">Add Attribute</button>
                     <button style={{marginBottom: 10, marginTop: 5}} onClick={ this.removeAttribute } className="btn btn-primary">Remove Attribute</button>
                 </div>
@@ -221,6 +233,7 @@ export default class CreateRow extends Component {
         } else {
             return (
                 <div>
+                    <button style={{marginBottom: 10, marginTop: 5, marginRight: 15}} onClick={ this.tupleCount } className="btn btn-primary">Tuple Count</button>
                     <button style={{marginBottom: 10, marginTop: 5}} onClick={ this.addAttribute } className="btn btn-primary">Add Attribute</button>
                 </div>
             )

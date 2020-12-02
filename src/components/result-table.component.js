@@ -78,7 +78,7 @@ export default class ResultTable extends Component {
     firstLetterCap(string) {
         let lowerString = string.toLowerCase();
         let firstChar   = string.charAt(0);
-        return firstChar + lowerString.slice(1, string.length);
+        return (firstChar + lowerString.slice(1, string.length)).replace('_',' ');
     }
 
     headersList(headers) {
@@ -97,7 +97,7 @@ export default class ResultTable extends Component {
                 <table className="table table-striped" style={{ marginTop: 20 }}>
 
                     <thead>
-                        <tr>
+                        <tr style={{fontWeight: 'bold'}}>
                             {this.headersList(this.context.table_headers)}
                         </tr>
                     </thead>
