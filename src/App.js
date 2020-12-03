@@ -8,7 +8,7 @@ import mapPage from "./components/mapPage.component";
 import graphPage from "./components/graphPage.component";
 import queriesPage from "./components/queriesPage.component";
 import NavBar from "./components/navBar.components.js";
-
+import About  from "./components/about.component.js";
 class App extends Component {
   render() {
     return (
@@ -19,11 +19,11 @@ class App extends Component {
                 <Switch>
 
                     <Route path="/queriesPage" component={queriesPage}/>
-                    <Route path="/home" component={queriesPage}/>
-                    <Route path="/graph" component={graphPage}/>
+                    <Route path="/home"        component={queriesPage}/>
+                    <Route path="/graph"       component={graphPage}/>
+                    <Route path="/map"         component={mapPage}/>
+                    <Route path="/about"       component={About}/>
                     {/* <Route path="/accidentGraph" component={AccidentGraph}/> */}
-                    <Route path="/map" component={mapPage}/>
-                    {/* <Route path="/About" component={About}/> */}
                     
                 </Switch>
             </Router>
