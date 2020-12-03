@@ -36,7 +36,48 @@ class About extends Component {
 					</div>
 				</div>
 
+				<br/>
+				<br/>
+				<h2>Software Involved:</h2>
+				{/* <br/> */}
 
+				<div style ={{marginLeft: "50px"}}>
+					<div>
+
+						<h4>- React.js frontend</h4>
+						<div style ={{marginLeft: "50px"}}>
+							<p>
+							Our frontend will allow the user to access graphical and text displayed information, such
+							as printable lists or our choropleth map projections, upon its return as a result of our
+							database queries.
+							</p>
+						</div>
+
+						<h4>- ExpressJS and Node.js backend</h4>
+						<div style ={{marginLeft: "50px"}}>
+							<p>
+							Our Node backend will receive requests from our React frontend and then process these
+							request for our database.
+							</p>
+						</div>
+
+						<h4>- Oracle Database</h4>
+						<div style ={{marginLeft: "50px"}}>
+							<p>
+							The car crash data will be stored in a SQL Oracle database and will await for queries
+							passed to it from our Node backend.
+							</p>
+						</div>
+
+					</div>
+				</div>
+
+
+
+
+
+
+				<br/>
 				<br/>
 				<h2>Meet the TFA Team:</h2>
 				{/* <br/> */}
